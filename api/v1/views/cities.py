@@ -111,3 +111,25 @@ def update_city(city_id):
 
         # Save updated city
         city.save()
+        # Return updated city object
+        return jsonify(city.to_dict()), 200
+    else:
+        # Return 404 error
+        abort(404)
+
+# Error handlers
+@app_views.errorhandler(404)
+def not_found(error):
+    """
+    404 error
+    """
+    # Return a JSON response for 404 error
+    return jsonify({'error': 'Not found'}), 404
+
+@app_views.errorhandler(400)
+def bad_request(error):
+    """
+    400 error
+    """
+    # Return a JSON response for 400 error
+    return jsonify({'error': 'Bad request'}), 400
